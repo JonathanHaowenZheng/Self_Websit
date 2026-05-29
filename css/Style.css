@@ -1,0 +1,371 @@
+/* =================================================== */
+/* ====== 1. 基础设置与双模颜色变量（网站的灵魂） ====== */
+/* =================================================== */
+:root {
+    /* 【默认暗黑模式】—— 音乐厅之夜 / 演奏沉浸 / 深夜代码 */
+    --bg-color: #111111;        
+    --text-main: #f0f0f0;       
+    --text-muted: #a0a0a0;
+    --card-bg: rgba(255, 255, 255, 0.02);
+    --card-border: rgba(255, 255, 255, 0.05);
+    --nav-border: rgba(255, 255, 255, 0.05);
+    --gold-accent: #D4AF37;     /* 闪耀的纯正香槟金 */
+    
+    --font-serif: 'Playfair Display', serif; 
+    --font-sans: 'Inter', sans-serif;        
+    transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease; /* 让黑白切换像呼吸一样平滑 */
+}
+
+[data-theme="light"] {
+    /* 【日间模式】—— 古典乐谱纸张 / LaTeX数学论文 / 白天理性思维 */
+    --bg-color: #F7F4EF;        /* 带有微暖纸张肌理的“乐谱高级白” */
+    --text-main: #1A1A1A;       /* 柔和不刺眼的“印刷深炭黑” */
+    --text-muted: #666666;      /* 辅助灰色 */
+    --card-bg: rgba(0, 0, 0, 0.015);
+    --card-border: rgba(0, 0, 0, 0.06);
+    --nav-border: rgba(0, 0, 0, 0.06);
+    --gold-accent: #A88326;     /* 降低亮度的“烤漆古铜金”，确保在白底上高级且清晰 */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =================================================== */
+/* ====== 2. 全局导航栏栏（含全新的手动切换按钮） ====== */
+/* =================================================== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+    border-bottom: 1px solid var(--nav-border); 
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--gold-accent);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--gold-accent);
+}
+
+.future-link {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* 昼夜手动切换图标样式 */
+.theme-toggle {
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+}
+
+.theme-toggle:hover {
+    color: var(--gold-accent);
+    transform: scale(1.15) rotate(15deg);
+}
+
+/* =================================================== */
+/* ====== 3. 主页 (INDEX.HTML) 专属样式                ====== */
+/* =================================================== */
+.hero-section {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 0 5%;
+}
+
+.hero-image {
+    flex: 1;
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image img {
+    max-width: 80%;
+    border-radius: 4px; 
+    box-shadow: -15px 15px 0px 0px rgba(212, 175, 55, 0.15); 
+    object-fit: cover;
+}
+
+.hero-text {
+    flex: 1;
+    padding: 2rem;
+}
+
+.eyebrow {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    color: var(--gold-accent);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+}
+
+.hero-text h1 {
+    font-family: var(--font-serif);
+    font-size: 4.5rem;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.dynamic-subtitle {
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+    opacity: 0.9;
+}
+
+.typing-text {
+    color: var(--gold-accent);
+    font-family: var(--font-serif); 
+    font-style: italic;
+}
+
+.cursor {
+    animation: blink 1s infinite;
+    background-color: var(--gold-accent);
+    display: inline-block;
+    width: 3px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.intro-description {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 85%;
+    margin-bottom: 2.5rem;
+}
+
+.action-group {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1px solid var(--gold-accent);
+    color: var(--gold-accent);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.cta-button:hover {
+    background-color: var(--gold-accent);
+    color: var(--bg-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.social-links a {
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--gold-accent);
+    transform: translateY(-3px);
+}
+
+/* =================================================== */
+/* ====== 4. 学历页 (EDUCATION.HTML) 专属样式          ====== */
+/* =================================================== */
+.education-section {
+    padding: 3rem 5% 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.dual-cards-container {
+    display: flex;
+    gap: 3rem;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.edu-card {
+    flex: 1;
+    background: var(--card-bg); 
+    border: 1px solid var(--card-border); 
+    border-radius: 8px;
+    padding: 3rem 2.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.5s ease;
+}
+
+.edu-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-icon {
+    font-size: 2rem;
+    color: var(--gold-accent);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.card-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--gold-accent);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--card-border); 
+}
+
+.edu-block {
+    margin-bottom: 2rem;
+}
+
+.edu-block:last-child {
+    margin-bottom: 0;
+}
+
+.edu-block h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.degree, .minor, .mentorship {
+    font-size: 1rem;
+    color: var(--text-main);
+    margin-bottom: 0.2rem;
+}
+
+.duration, .award-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.sub-heading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold-accent);
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.details {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.awards-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.awards-list li {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.awards-list li::before {
+    content: "✦"; 
+    position: absolute;
+    left: 0;
+    color: var(--gold-accent);
+    font-size: 0.8rem;
+}
+
+.ext-link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.ext-link:hover {
+    color: var(--gold-accent);
+}
+
+.tiny-icon {
+    font-size: 0.7rem;
+    opacity: 0;
+    transform: translateX(-5px) translateY(5px);
+    transition: all 0.3s ease;
+}
+
+.ext-link:hover .tiny-icon {
+    opacity: 1;
+    transform: translateX(2px) translateY(-2px);
+}
