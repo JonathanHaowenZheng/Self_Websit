@@ -15,7 +15,7 @@
                 document.documentElement.setAttribute('data-theme', savedTheme);
             } else {
                 const hour = new Date().getHours();
-                if (hour >= 6 && hour < 18) { // 早上6点到晚上6点是白天
+                if (hour >= 6 && hour < 18) {
                     document.documentElement.setAttribute('data-theme', 'light');
                 } else {
                     document.documentElement.setAttribute('data-theme', 'dark');
